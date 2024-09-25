@@ -1,7 +1,7 @@
 import 'package:ecommerce_app/data/datasource/CategoriesOnlineDataSource.dart';
-import 'package:ecommerce_app/data/model/responses/Category.dart';
 
 import 'package:ecommerce_app/domain/Result.dart';
+import 'package:ecommerce_app/domain/model/Category.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/repository/CategoriesRepository.dart';

@@ -1,16 +1,18 @@
+import 'package:ecommerce_app/domain/model/Category.dart';
 import 'package:ecommerce_app/presentation/core/resources/color_manager.dart';
 import 'package:ecommerce_app/presentation/core/resources/values_manager.dart';
 import 'package:ecommerce_app/presentation/features/main_layout/categories/presentation/widgets/category_item.dart';
 import 'package:flutter/material.dart';
 
-class CategoriesList extends StatefulWidget {
-  const CategoriesList({super.key});
+class CategoriesListWidget extends StatefulWidget {
+  List<Category> categories;
+  CategoriesListWidget(this.categories,{super.key});
 
   @override
-  State<CategoriesList> createState() => _CategoriesListState();
+  State<CategoriesListWidget> createState() => _CategoriesListWidgetState();
 }
 
-class _CategoriesListState extends State<CategoriesList> {
+class _CategoriesListWidgetState extends State<CategoriesListWidget> {
   // Index of the currently selected category
   int selectedIndex = 0;
 
@@ -45,9 +47,9 @@ class _CategoriesListState extends State<CategoriesList> {
           bottomLeft: Radius.circular(AppSize.s12),
         ),
         child: ListView.builder(
-          itemCount: 20,
+          itemCount: widget.categories.length,
           itemBuilder: (context, index) => CategoryItem(index,
-              "Laptops & Electronics", selectedIndex == index, onItemClick),
+            widget.categories[index].name ??"", selectedIndex == index, onItemClick),
         ),
       ),
     ));

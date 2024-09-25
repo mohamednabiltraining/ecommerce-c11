@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/domain/model/Category.dart';
+
 /// _id : "6439d61c0049ad0b52b90051"
 /// name : "Music"
 /// slug : "music"
@@ -5,14 +7,14 @@
 /// createdAt : "2023-04-14T22:39:24.365Z"
 /// updatedAt : "2023-04-14T22:39:24.365Z"
 
-class Category {
-  Category({
+class CategoryDto {
+  CategoryDto({
       this.id, 
       this.name, 
       this.slug, 
       this.image,});
 
-  Category.fromJson(dynamic json) {
+  CategoryDto.fromJson(dynamic json) {
     id = json['_id'];
     name = json['name'];
     slug = json['slug'];
@@ -32,4 +34,12 @@ class Category {
     return map;
   }
 
+  Category toCategory(){
+    return Category(
+        id: id,
+        name: name,
+        slug: slug,
+        image: image
+    );
+  }
 }

@@ -1,25 +1,27 @@
 import 'package:ecommerce_app/data/ApiManager.dart';
+import 'package:ecommerce_app/data/datasource/BrandsOnlineDataSource.dart';
 import 'package:ecommerce_app/data/datasource/CategoriesOnlineDataSource.dart';
 import 'package:ecommerce_app/domain/Result.dart';
+import 'package:ecommerce_app/domain/model/Brand.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/model/Category.dart';
 
-@Injectable(as: CategoriesOnlineDataSource)
-class CategoriesOnlineDataSourceImpl implements
-    CategoriesOnlineDataSource{
+@Injectable(as: BrandsOnlineDataSource)
+class BrandsOnlineDatasourceImpl implements
+    BrandsOnlineDataSource{
   ApiManager apiManager;
   // constructor injection
   @factoryMethod
-  CategoriesOnlineDataSourceImpl(this.apiManager);
+  BrandsOnlineDatasourceImpl(this.apiManager);
 
   @override
-  Future<Result<List<Category>?>> getCategories()async{
-    var result = await apiManager.loadCategories();
+  Future<Result<List<Brand>?>> getBrands() async{
+    var result = await apiManager.loadBrands();
 
     switch (result) {
       case Success() : {
-        var convertedList = result.data?.map((catDto)=> catDto.toCategory()).toList();
+        var convertedList = result.data?.map((brandDto)=> brandDto.toBrand()).toList();
         return Success(data: convertedList);
       }
       case ServerError():{
@@ -29,7 +31,6 @@ class CategoriesOnlineDataSourceImpl implements
         return Error(result.exception);
       }
     }
-
   }
 
 

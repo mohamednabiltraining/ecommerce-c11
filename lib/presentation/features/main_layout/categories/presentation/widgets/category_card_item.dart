@@ -18,7 +18,6 @@ class CategoryCardItem extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: AppSize.s16),
       // Height of the card set with fixed size to make all image same size but it can be deleted without affecting the code
-      height: AppSize.s100,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(AppSize.s12),
         child: Stack(
@@ -26,6 +25,7 @@ class CategoryCardItem extends StatelessWidget {
             // Background image for the category
             Image.asset(
               image,
+              height: 100.h,
               fit: BoxFit.cover,
               width: double.infinity,
             ),
