@@ -4,6 +4,7 @@ import 'package:ecommerce_app/presentation/features/auth/presentation/screens/si
 import 'package:ecommerce_app/presentation/features/cart/screens/cart_screen.dart';
 import 'package:ecommerce_app/presentation/features/main_layout/main_layout.dart';
 import 'package:ecommerce_app/presentation/features/product_details/presentation/screen/product_details.dart';
+import 'package:ecommerce_app/presentation/features/products_screen/presentation/screens/ProductsCatalogArgs.dart';
 import 'package:ecommerce_app/presentation/features/products_screen/presentation/screens/products_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const MainLayout());
 
       case Routes.productsScreenRoute:
-        return MaterialPageRoute(builder: (_) => const ProductsScreen());
+        return MaterialPageRoute(builder: (_) => ProductsScreen(
+            settings.arguments as ProductsCatalogArgs?
+        ));
 
       case Routes.productDetails:
         return MaterialPageRoute(builder: (_) => const ProductDetails());

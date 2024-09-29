@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoryCardItem extends StatelessWidget {
   final String title;
+
   final String image;
   final Function navigation;
 

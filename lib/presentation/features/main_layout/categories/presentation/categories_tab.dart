@@ -8,7 +8,7 @@ import 'package:ecommerce_app/presentation/features/main_layout/categories/prese
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'widgets/sub_categories_list.dart';
+import 'widgets/subCategories/sub_categories_list.dart';
 
 class CategoriesTab extends StatefulWidget {
   const CategoriesTab({super.key});

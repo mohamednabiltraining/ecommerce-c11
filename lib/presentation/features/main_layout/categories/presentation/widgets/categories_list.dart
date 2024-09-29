@@ -4,9 +4,11 @@ import 'package:ecommerce_app/presentation/core/resources/values_manager.dart';
 import 'package:ecommerce_app/presentation/features/main_layout/categories/presentation/widgets/category_item.dart';
 import 'package:flutter/material.dart';
 
+typedef OnCategoryItemSelected = void Function(Category);
 class CategoriesListWidget extends StatefulWidget {
   List<Category> categories;
-  CategoriesListWidget(this.categories,{super.key});
+  OnCategoryItemSelected onCategoryItemSelected;
+  CategoriesListWidget(this.categories,this.onCategoryItemSelected,{super.key});
 
   @override
   State<CategoriesListWidget> createState() => _CategoriesListWidgetState();
@@ -59,6 +61,7 @@ class _CategoriesListWidgetState extends State<CategoriesListWidget> {
   onItemClick(int index) {
     setState(() {
       selectedIndex = index;
+      widget.onCategoryItemSelected(widget.categories[index]);
     });
   }
 }
