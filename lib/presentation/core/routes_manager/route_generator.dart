@@ -11,16 +11,15 @@ import 'package:flutter/material.dart';
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-
       case Routes.cartRoute:
         return MaterialPageRoute(builder: (_) => const CartScreen());
       case Routes.mainRoute:
         return MaterialPageRoute(builder: (_) => const MainLayout());
 
       case Routes.productsScreenRoute:
-        return MaterialPageRoute(builder: (_) => ProductsScreen(
-            settings.arguments as ProductsCatalogArgs?
-        ));
+        return MaterialPageRoute(
+            builder: (_) =>
+                ProductsScreen(settings.arguments as ProductsCatalogArgs?));
 
       case Routes.productDetails:
         return MaterialPageRoute(builder: (_) => const ProductDetails());

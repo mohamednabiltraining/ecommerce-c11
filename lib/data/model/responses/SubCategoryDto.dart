@@ -9,11 +9,7 @@ import 'package:ecommerce_app/domain/model/SubCategory.dart';
 /// updatedAt : "2023-04-14T22:39:24.365Z"
 
 class SubCategoryDto {
-  SubCategoryDto({
-      this.id, 
-      this.name, 
-      this.slug, 
-    this.category});
+  SubCategoryDto({this.id, this.name, this.slug, this.category});
 
   SubCategoryDto.fromJson(dynamic json) {
     id = json['_id'];
@@ -35,12 +31,7 @@ class SubCategoryDto {
     return map;
   }
 
-  Subcategory toSubCategory(){
-    return Subcategory(
-        id: id,
-        name: name,
-        slug: slug,
-        category: category
-    );
+  Subcategory toSubCategory() {
+    return Subcategory(id: id, name: name, slug: slug, category: category);
   }
 }

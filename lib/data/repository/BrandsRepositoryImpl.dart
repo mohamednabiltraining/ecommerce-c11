@@ -5,8 +5,7 @@ import 'package:ecommerce_app/domain/repository/BrandsRepository.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: BrandsRepository)
-class BrandsRepoImpl implements BrandsRepository{
-
+class BrandsRepoImpl implements BrandsRepository {
   BrandsOnlineDataSource brandsOnlineDataSource;
   BrandsRepoImpl(this.brandsOnlineDataSource);
 
@@ -14,7 +13,4 @@ class BrandsRepoImpl implements BrandsRepository{
   Future<Result<List<Brand>?>> getBrands() {
     return brandsOnlineDataSource.getBrands();
   }
-
-
-
 }

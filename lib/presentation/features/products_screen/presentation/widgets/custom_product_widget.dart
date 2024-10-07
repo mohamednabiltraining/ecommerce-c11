@@ -11,13 +11,11 @@ class CustomProductWidget extends StatelessWidget {
   final double height;
   Product product;
 
-
-  CustomProductWidget({
-    super.key,
-    required this.width,
-    required this.height,
-    required this.product
-  });
+  CustomProductWidget(
+      {super.key,
+      required this.width,
+      required this.height,
+      required this.product});
 
   String truncateTitle(String title) {
     List<String> words = title.split(' ');
@@ -76,7 +74,7 @@ class CustomProductWidget extends StatelessWidget {
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(14.r)),
                     child: Image.network(
-                      product.imageCover??"",
+                      product.imageCover ?? "",
                       fit: BoxFit.cover,
                       width: width,
                     ),
@@ -96,7 +94,7 @@ class CustomProductWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      truncateTitle(product.title ??""),
+                      truncateTitle(product.title ?? ""),
                       style: getMediumStyle(
                         color: ColorManager.textColor,
                         fontSize: 14.sp,
@@ -104,7 +102,7 @@ class CustomProductWidget extends StatelessWidget {
                     ),
                     SizedBox(height: height * 0.002),
                     Text(
-                      truncateDescription(product.description??""),
+                      truncateDescription(product.description ?? ""),
                       style: getRegularStyle(
                         color: ColorManager.textColor,
                         fontSize: 14.sp,

@@ -13,13 +13,16 @@ import '../CategoryDto.dart';
 ///
 class BrandsResponse {
   BrandsResponse({
-      this.results, 
-      this.metadata, 
-      this.data,});
+    this.results,
+    this.metadata,
+    this.data,
+  });
 
   BrandsResponse.fromJson(dynamic json) {
     results = json['results'];
-    metadata = json['metadata'] != null ? PaginationInfo.fromJson(json['metadata']) : null;
+    metadata = json['metadata'] != null
+        ? PaginationInfo.fromJson(json['metadata'])
+        : null;
     if (json['data'] != null) {
       data = [];
       json['data'].forEach((v) {
@@ -42,5 +45,4 @@ class BrandsResponse {
     }
     return map;
   }
-
 }

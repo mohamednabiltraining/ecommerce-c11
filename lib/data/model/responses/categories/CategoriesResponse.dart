@@ -7,13 +7,16 @@ import '../CategoryDto.dart';
 
 class CategoriesResponse {
   CategoriesResponse({
-      this.results, 
-      this.metadata, 
-      this.data,});
+    this.results,
+    this.metadata,
+    this.data,
+  });
 
   CategoriesResponse.fromJson(dynamic json) {
     results = json['results'];
-    metadata = json['metadata'] != null ? PaginationInfo.fromJson(json['metadata']) : null;
+    metadata = json['metadata'] != null
+        ? PaginationInfo.fromJson(json['metadata'])
+        : null;
     if (json['data'] != null) {
       data = [];
       json['data'].forEach((v) {
@@ -36,5 +39,4 @@ class CategoriesResponse {
     }
     return map;
   }
-
 }

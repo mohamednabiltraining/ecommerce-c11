@@ -1,20 +1,18 @@
 import 'package:ecommerce_app/domain/model/Brand.dart';
 import 'package:ecommerce_app/presentation/core/routes_manager/routes.dart';
 import 'package:ecommerce_app/presentation/features/products_screen/presentation/screens/ProductsCatalogArgs.dart';
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomBrandWidget extends StatelessWidget {
   Brand brand;
-  CustomBrandWidget(this.brand,{super.key});
+  CustomBrandWidget(this.brand, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Navigator.pushNamed(context, Routes.productsScreenRoute,
-          arguments: ProductsCatalogArgs(
-            brand: brand.id
-          )),
+          arguments: ProductsCatalogArgs(brand: brand.id)),
       child: Column(
         children: [
           ClipRRect(
@@ -26,8 +24,8 @@ class CustomBrandWidget extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Image.network(
-              brand.image??""
-              ,fit: BoxFit.scaleDown,
+                brand.image ?? "",
+                fit: BoxFit.scaleDown,
               ),
             ),
           ),
@@ -37,25 +35,24 @@ class CustomBrandWidget extends StatelessWidget {
   }
 }
 
-
-        // CachedNetworkImage(
-        //   height: 80,
-        //   width: 80,
-        //   fit: BoxFit.cover,
-        //   imageUrl: ImageAssets.categoryHomeImage,
-        //   placeholder: (context, url) =>
-        //       const Center(child: CircularProgressIndicator()),
-        //   errorWidget: (context, url, error) =>
-        //       const Center(child: Icon(Icons.error)),
-        //   imageBuilder: (context, imageProvider) {
-        //     return Container(
-        //       decoration: BoxDecoration(
-        //         shape: BoxShape.circle,
-        //         image: DecorationImage(
-        //           image: imageProvider,
-        //           fit: BoxFit.cover,
-        //         ),
-        //       ),
-        //     );
-        //   },
-        // ),
+// CachedNetworkImage(
+//   height: 80,
+//   width: 80,
+//   fit: BoxFit.cover,
+//   imageUrl: ImageAssets.categoryHomeImage,
+//   placeholder: (context, url) =>
+//       const Center(child: CircularProgressIndicator()),
+//   errorWidget: (context, url, error) =>
+//       const Center(child: Icon(Icons.error)),
+//   imageBuilder: (context, imageProvider) {
+//     return Container(
+//       decoration: BoxDecoration(
+//         shape: BoxShape.circle,
+//         image: DecorationImage(
+//           image: imageProvider,
+//           fit: BoxFit.cover,
+//         ),
+//       ),
+//     );
+//   },
+// ),

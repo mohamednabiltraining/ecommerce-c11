@@ -25,6 +25,7 @@ class _CategoriesTabState extends State<CategoriesTab> {
     super.initState();
     categoriesViewModel.loadCategories();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CategoriesViewModel>(
@@ -35,22 +36,23 @@ class _CategoriesTabState extends State<CategoriesTab> {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          child: BlocBuilder<CategoriesViewModel,CategoriesState>(
-              builder: (context, state) {
-                switch (state) {
-
-                  case CategoriesLoadedState():{
-                    return CategoriesTabContent(state.categories ??[]);
+          child: BlocBuilder<CategoriesViewModel, CategoriesState>(
+            builder: (context, state) {
+              switch (state) {
+                case CategoriesLoadedState():
+                  {
+                    return CategoriesTabContent(state.categories ?? []);
                   }
-                  case CategoriesLoadingState():
+                case CategoriesLoadingState():
                   return Center(child: LoadingStateWidget());
-                  case CategoriesErrorState():{
+                case CategoriesErrorState():
+                  {
                     return ErrorStateWidget(exception: state.exception);
                   }
-                }
+              }
 
-                    //                   CategoriesList()
-              },
+              //                   CategoriesList()
+            },
           ),
         ),
       ),

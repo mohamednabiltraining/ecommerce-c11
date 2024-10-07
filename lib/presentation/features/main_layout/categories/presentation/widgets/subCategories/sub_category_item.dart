@@ -16,9 +16,7 @@ class SubCategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Navigator.pushNamed(context, Routes.productsScreenRoute,
-      arguments: ProductsCatalogArgs(
-        subCategory: subcategory.id
-      )),
+          arguments: ProductsCatalogArgs(subCategory: subcategory.id)),
       overlayColor: WidgetStateProperty.all(Colors.transparent),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,7 +29,7 @@ class SubCategoryItem extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppSize.s10),
                 child: Image.asset(
-            //                  subcategory.image,
+                  //                  subcategory.image,
                   ImageAssets.categoryCardImage,
                   fit: BoxFit.cover,
                   height: 20,
@@ -42,8 +40,7 @@ class SubCategoryItem extends StatelessWidget {
           Text(
             '${subcategory.name}',
             maxLines: 2,
-            style: getRegularStyle(color: ColorManager.primary).copyWith(
-            ),
+            style: getRegularStyle(color: ColorManager.primary).copyWith(),
           )
         ],
       ),

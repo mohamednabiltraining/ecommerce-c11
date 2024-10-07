@@ -24,22 +24,22 @@ import 'package:ecommerce_app/domain/model/Product.dart';
 
 class ProductDto {
   ProductDto({
-      this.sold, 
-      this.images, 
-      this.subcategory, 
-      this.ratingsQuantity, 
-      this.id, 
-      this.title, 
-      this.slug, 
-      this.description, 
-      this.quantity, 
-      this.price, 
-      this.priceAfterDiscount, 
-      this.imageCover, 
-      this.category, 
-      this.brand, 
-      this.ratingsAverage, 
-      });
+    this.sold,
+    this.images,
+    this.subcategory,
+    this.ratingsQuantity,
+    this.id,
+    this.title,
+    this.slug,
+    this.description,
+    this.quantity,
+    this.price,
+    this.priceAfterDiscount,
+    this.imageCover,
+    this.category,
+    this.brand,
+    this.ratingsAverage,
+  });
 
   ProductDto.fromJson(dynamic json) {
     sold = json['sold'];
@@ -59,7 +59,9 @@ class ProductDto {
     price = json['price'];
     priceAfterDiscount = json['priceAfterDiscount'];
     imageCover = json['imageCover'];
-    category = json['category'] != null ? CategoryDto.fromJson(json['category']) : null;
+    category = json['category'] != null
+        ? CategoryDto.fromJson(json['category'])
+        : null;
     brand = json['brand'] != null ? BrandDto.fromJson(json['brand']) : null;
     ratingsAverage = json['ratingsAverage'];
     id = json['id'];
@@ -109,22 +111,24 @@ class ProductDto {
 
   Product convertToProduct() {
     return Product(
-      id: id,
-      title: title,
-      brand: brand?.toBrand(),
-      category: category?.toCategory(),
-      subcategory: subcategory?.map((subCatDto) =>subCatDto.toSubCategory() ,).toList(),
-      slug: slug,
-      description: description,
-      imageCover: imageCover,
-      images: images,
-      price: price,
-      priceAfterDiscount: priceAfterDiscount,
-      quantity: quantity,
-      ratingsAverage: ratingsAverage,
-      ratingsQuantity: ratingsQuantity,
-      sold: sold
-    );
+        id: id,
+        title: title,
+        brand: brand?.toBrand(),
+        category: category?.toCategory(),
+        subcategory: subcategory
+            ?.map(
+              (subCatDto) => subCatDto.toSubCategory(),
+            )
+            .toList(),
+        slug: slug,
+        description: description,
+        imageCover: imageCover,
+        images: images,
+        price: price,
+        priceAfterDiscount: priceAfterDiscount,
+        quantity: quantity,
+        ratingsAverage: ratingsAverage,
+        ratingsQuantity: ratingsQuantity,
+        sold: sold);
   }
-
 }

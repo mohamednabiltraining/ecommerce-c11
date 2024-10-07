@@ -5,7 +5,7 @@ import 'package:ecommerce_app/domain/model/Brand.dart';
 import 'package:ecommerce_app/presentation/core/widget/ErrorStateWidget.dart';
 import 'package:ecommerce_app/presentation/core/widget/LoadingStateWidget.dart';
 import 'package:ecommerce_app/presentation/features/main_layout/home/presentation/BrandsViewModel.dart';
-import 'package:ecommerce_app/presentation/features/main_layout/home/presentation/CategoriesViewModel.dart' ;
+import 'package:ecommerce_app/presentation/features/main_layout/home/presentation/CategoriesViewModel.dart';
 import 'package:ecommerce_app/presentation/features/main_layout/home/presentation/widgets/custom_brand_widget.dart';
 import 'package:ecommerce_app/presentation/features/main_layout/home/presentation/widgets/custom_category_widget.dart';
 import 'package:flutter/material.dart';
@@ -61,15 +61,15 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(providers:[
-      BlocProvider<BrandsViewModel>(
-        create: (BuildContext context) => brandsViewModel,
-      ),
-      BlocProvider<CategoriesViewModel>(
-        create: (BuildContext context) => categoriesViewModel
-      ),
-
-    ], child: SingleChildScrollView(
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<BrandsViewModel>(
+            create: (BuildContext context) => brandsViewModel,
+          ),
+          BlocProvider<CategoriesViewModel>(
+              create: (BuildContext context) => categoriesViewModel),
+        ],
+        child: SingleChildScrollView(
           child: Column(
             children: [
               CustomAdsWidget(
@@ -79,39 +79,46 @@ class _HomeTabState extends State<HomeTab> {
               ),
               Column(
                 children: [
-                  CustomSectionBar(sectionNname: 'Categories', onViewAllClick: () {}),
-                  BlocBuilder<CategoriesViewModel,CategoriesState>(
-                    builder:(context, state) {
+                  CustomSectionBar(
+                      sectionNname: 'Categories', onViewAllClick: () {}),
+                  BlocBuilder<CategoriesViewModel, CategoriesState>(
+                    builder: (context, state) {
                       switch (state) {
-
-                        case InitialHomeState():{
-                          return LoadingStateWidget();
-                        }
-                        case CategoriesLoadedState():{
-                          var categories = state.categories ?? [];
-                          return SizedBox(
-                            height: 270.h,
-                            child: GridView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return CustomCategoryWidget(categories[index]);
-                              },
-                              itemCount: categories.length,
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
+                        case InitialHomeState():
+                          {
+                            return LoadingStateWidget();
+                          }
+                        case CategoriesLoadedState():
+                          {
+                            var categories = state.categories ?? [];
+                            return SizedBox(
+                              height: 270.h,
+                              child: GridView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return CustomCategoryWidget(
+                                      categories[index]);
+                                },
+                                itemCount: categories.length,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                ),
                               ),
-                            ),
-                          );
-                        }
-                        case CategoriesLoadingState():{
-                          return LoadingStateWidget();
-                        }
-                        case CategoriesErrorState():{
-                          return ErrorStateWidget(exception: state.exception,);
-
+                            );
+                          }
+                        case CategoriesLoadingState():
+                          {
+                            return LoadingStateWidget();
+                          }
+                        case CategoriesErrorState():
+                          {
+                            return ErrorStateWidget(
+                              exception: state.exception,
+                            );
                           }
                       }
-                      },
+                    },
                   ),
                   SizedBox(height: 12.h),
                   CustomSectionBar(
@@ -120,36 +127,37 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                   BlocBuilder<BrandsViewModel, BrandsState>(
                     buildWhen: (previous, current) {
-                      if(current is CategoriesState){
+                      if (current is CategoriesState) {
                         return false;
                       }
                       return true;
                     },
                     builder: (context, state) {
-
                       switch (state) {
-
-                        case BrandsLoadedState():{
-                          var brands = state.brands ?? [];
-                          return SizedBox(
-                            height: 270.h,
-                            child: GridView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return CustomBrandWidget(brands[index] ??Brand());
-                              },
-                              itemCount: brands.length,
-                              gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
+                        case BrandsLoadedState():
+                          {
+                            var brands = state.brands ?? [];
+                            return SizedBox(
+                              height: 270.h,
+                              child: GridView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return CustomBrandWidget(
+                                      brands[index] ?? Brand());
+                                },
+                                itemCount: brands.length,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                ),
                               ),
-                            ),
-                          );
-                        }
+                            );
+                          }
                         case BrandsLoadingState():
-                        return LoadingStateWidget();
+                          return LoadingStateWidget();
                         case BrandsErrorState():
-                          return ErrorStateWidget(exception: state.exception);                      }
+                          return ErrorStateWidget(exception: state.exception);
+                      }
                     },
                   ),
 
@@ -183,6 +191,5 @@ class _HomeTabState extends State<HomeTab> {
             ],
           ),
         ));
-
   }
 }

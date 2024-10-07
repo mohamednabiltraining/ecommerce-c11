@@ -5,10 +5,12 @@ import 'package:ecommerce_app/presentation/features/main_layout/categories/prese
 import 'package:flutter/material.dart';
 
 typedef OnCategoryItemSelected = void Function(Category);
+
 class CategoriesListWidget extends StatefulWidget {
   List<Category> categories;
   OnCategoryItemSelected onCategoryItemSelected;
-  CategoriesListWidget(this.categories,this.onCategoryItemSelected,{super.key});
+  CategoriesListWidget(this.categories, this.onCategoryItemSelected,
+      {super.key});
 
   @override
   State<CategoriesListWidget> createState() => _CategoriesListWidgetState();
@@ -50,8 +52,11 @@ class _CategoriesListWidgetState extends State<CategoriesListWidget> {
         ),
         child: ListView.builder(
           itemCount: widget.categories.length,
-          itemBuilder: (context, index) => CategoryItem(index,
-            widget.categories[index].name ??"", selectedIndex == index, onItemClick),
+          itemBuilder: (context, index) => CategoryItem(
+              index,
+              widget.categories[index].name ?? "",
+              selectedIndex == index,
+              onItemClick),
         ),
       ),
     ));

@@ -7,20 +7,18 @@ import 'package:injectable/injectable.dart';
 
 import '../../domain/repository/CategoriesRepository.dart';
 
-@Injectable(as: CategoriesRepository )
-class CategoriesRepositoryImpl implements CategoriesRepository{
+@Injectable(as: CategoriesRepository)
+class CategoriesRepositoryImpl implements CategoriesRepository {
   CategoriesOnlineDataSource dataSource;
   @factoryMethod
   CategoriesRepositoryImpl(this.dataSource);
   @override
   Future<Result<List<Category>?>> getCategories() {
-   return dataSource.getCategories();
+    return dataSource.getCategories();
   }
 
   @override
   Future<Result<List<Subcategory>?>> getSubCategories(String catId) {
     return dataSource.getSubCategories(catId);
   }
-
-
 }

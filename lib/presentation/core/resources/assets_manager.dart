@@ -25,7 +25,7 @@ abstract class ImageAssets {
   static const String searchIcon = "$imagePath/search.png";
 }
 
-class SvgAssets{
+class SvgAssets {
   static const String routeLogo = "$svgPath/route.svg";
   static const String eye = "$svgPath/Eye.svg";
   static const String edit = "$svgPath/edit (1) 5.svg";
@@ -51,8 +51,6 @@ abstract class IconsAssets {
   static String get icHeart => _icHeart;
   static String get icClickedHeart => _icClickedHeart;
 }
-
-
 
 class JsonAssets {
   static const String loading = "$jsonPath/loading.json";

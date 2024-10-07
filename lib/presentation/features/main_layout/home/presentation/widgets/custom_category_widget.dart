@@ -9,15 +9,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomCategoryWidget extends StatelessWidget {
   Category category;
-  CustomCategoryWidget(this.category,{super.key});
+  CustomCategoryWidget(this.category, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Navigator.pushNamed(context, Routes.productsScreenRoute,
-          arguments: ProductsCatalogArgs(
-            category: category.id
-          )),
+          arguments: ProductsCatalogArgs(category: category.id)),
       child: Column(
         children: [
           // CachedNetworkImage(
@@ -45,18 +43,18 @@ class CustomCategoryWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(100.r),
             child: Container(
-              height: 100.h,
-              width: 100.w,
-              child: CachedNetworkImage(imageUrl:
-              category.image ??"",
-                fit: BoxFit.cover,
-              )
-            ),
+                height: 100.h,
+                width: 100.w,
+                child: CachedNetworkImage(
+                  imageUrl: category.image ?? "",
+                  fit: BoxFit.cover,
+                )),
           ),
           SizedBox(height: 8.h),
           Text(
-            category.name ??"",
-            style: getRegularStyle(color: ColorManager.darkBlue, fontSize: 14.sp),
+            category.name ?? "",
+            style:
+                getRegularStyle(color: ColorManager.darkBlue, fontSize: 14.sp),
           ),
         ],
       ),

@@ -9,10 +9,11 @@ import 'package:ecommerce_app/domain/model/Category.dart';
 
 class CategoryDto {
   CategoryDto({
-      this.id, 
-      this.name, 
-      this.slug, 
-      this.image,});
+    this.id,
+    this.name,
+    this.slug,
+    this.image,
+  });
 
   CategoryDto.fromJson(dynamic json) {
     id = json['_id'];
@@ -34,12 +35,7 @@ class CategoryDto {
     return map;
   }
 
-  Category toCategory(){
-    return Category(
-        id: id,
-        name: name,
-        slug: slug,
-        image: image
-    );
+  Category toCategory() {
+    return Category(id: id, name: name, slug: slug, image: image);
   }
 }

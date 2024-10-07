@@ -4,9 +4,10 @@
 
 class PaginationInfo {
   PaginationInfo({
-      this.currentPage, 
-      this.numberOfPages, 
-      this.limit,});
+    this.currentPage,
+    this.numberOfPages,
+    this.limit,
+  });
 
   PaginationInfo.fromJson(dynamic json) {
     currentPage = json['currentPage'];
@@ -24,5 +25,4 @@ class PaginationInfo {
     map['limit'] = limit;
     return map;
   }
-
 }

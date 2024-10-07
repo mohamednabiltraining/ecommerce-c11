@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoriesTabContent extends StatefulWidget {
   List<Category> categories;
-  CategoriesTabContent(this.categories,{super.key});
+  CategoriesTabContent(this.categories, {super.key});
 
   @override
   State<CategoriesTabContent> createState() => _CategoriesTabContentState();
@@ -26,7 +26,7 @@ class _CategoriesTabContentState extends State<CategoriesTabContent> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CategoriesListWidget(widget.categories ??[],onCategoryItemSelected),
+        CategoriesListWidget(widget.categories ?? [], onCategoryItemSelected),
         SizedBox(
           width: AppSize.s16,
         ),
@@ -35,7 +35,7 @@ class _CategoriesTabContentState extends State<CategoriesTabContent> {
     );
   }
 
-  void onCategoryItemSelected(Category category){
+  void onCategoryItemSelected(Category category) {
     setState(() {
       selectedCategory = category;
     });

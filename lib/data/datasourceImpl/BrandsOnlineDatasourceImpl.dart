@@ -8,30 +8,31 @@ import 'package:injectable/injectable.dart';
 import '../../domain/model/Category.dart';
 
 @Injectable(as: BrandsOnlineDataSource)
-class BrandsOnlineDatasourceImpl implements
-    BrandsOnlineDataSource{
+class BrandsOnlineDatasourceImpl implements BrandsOnlineDataSource {
   ApiManager apiManager;
   // constructor injection
   @factoryMethod
   BrandsOnlineDatasourceImpl(this.apiManager);
 
   @override
-  Future<Result<List<Brand>?>> getBrands() async{
+  Future<Result<List<Brand>?>> getBrands() async {
     var result = await apiManager.loadBrands();
 
     switch (result) {
-      case Success() : {
-        var convertedList = result.data?.map((brandDto)=> brandDto.toBrand()).toList();
-        return Success(data: convertedList);
-      }
-      case ServerError():{
-        return ServerError(result.exception);
-      }
-      case Error():{
-        return Error(result.exception);
-      }
+      case Success():
+        {
+          var convertedList =
+              result.data?.map((brandDto) => brandDto.toBrand()).toList();
+          return Success(data: convertedList);
+        }
+      case ServerError():
+        {
+          return ServerError(result.exception);
+        }
+      case Error():
+        {
+          return Error(result.exception);
+        }
     }
   }
-
-
 }

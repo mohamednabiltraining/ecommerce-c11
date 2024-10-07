@@ -6,11 +6,7 @@
 /// updatedAt : "2023-04-14T22:39:24.365Z"
 
 class Subcategory {
-  Subcategory({
-      this.id, 
-      this.name, 
-      this.slug,
-    this.category});
+  Subcategory({this.id, this.name, this.slug, this.category});
 
   String? id;
   String? name;

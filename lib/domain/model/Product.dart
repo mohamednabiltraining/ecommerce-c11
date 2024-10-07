@@ -23,22 +23,22 @@ import 'package:ecommerce_app/domain/model/SubCategory.dart';
 
 class Product {
   Product({
-      this.sold, 
-      this.images, 
-      this.subcategory, 
-      this.ratingsQuantity, 
-      this.id, 
-      this.title, 
-      this.slug, 
-      this.description, 
-      this.quantity, 
-      this.price, 
-      this.priceAfterDiscount, 
-      this.imageCover, 
-      this.category, 
-      this.brand, 
-      this.ratingsAverage, 
-      });
+    this.sold,
+    this.images,
+    this.subcategory,
+    this.ratingsQuantity,
+    this.id,
+    this.title,
+    this.slug,
+    this.description,
+    this.quantity,
+    this.price,
+    this.priceAfterDiscount,
+    this.imageCover,
+    this.category,
+    this.brand,
+    this.ratingsAverage,
+  });
 
   num? sold;
   List<String>? images;
@@ -55,6 +55,4 @@ class Product {
   Category? category;
   Brand? brand;
   num? ratingsAverage;
-
-
 }

@@ -7,10 +7,11 @@ import 'package:ecommerce_app/domain/model/Brand.dart';
 
 class BrandDto {
   BrandDto({
-      this.id, 
-      this.name, 
-      this.slug, 
-      this.image,});
+    this.id,
+    this.name,
+    this.slug,
+    this.image,
+  });
 
   BrandDto.fromJson(dynamic json) {
     id = json['_id'];
@@ -33,12 +34,6 @@ class BrandDto {
   }
 
   Brand toBrand() {
-    return Brand(
-      id: id,
-      name: name,
-      slug: slug,
-      image: image
-    );
+    return Brand(id: id, name: name, slug: slug, image: image);
   }
-
 }

@@ -13,13 +13,13 @@ import 'package:ecommerce_app/presentation/features/main_layout/categories/prese
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class SubCategoriesListWidget extends StatefulWidget {
   Category category;
-  SubCategoriesListWidget(this.category,{super.key});
+  SubCategoriesListWidget(this.category, {super.key});
 
   @override
-  State<SubCategoriesListWidget> createState() => _SubCategoriesListWidgetState();
+  State<SubCategoriesListWidget> createState() =>
+      _SubCategoriesListWidgetState();
 }
 
 class _SubCategoriesListWidgetState extends State<SubCategoriesListWidget> {
@@ -28,15 +28,17 @@ class _SubCategoriesListWidgetState extends State<SubCategoriesListWidget> {
   @override
   void didUpdateWidget(covariant SubCategoriesListWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if(oldWidget.category != widget.category){
+    if (oldWidget.category != widget.category) {
       viewModel.loadSubCategories(widget.category.id);
     }
   }
+
   @override
   void initState() {
     super.initState();
     viewModel.loadSubCategories(widget.category.id);
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -55,36 +57,38 @@ class _SubCategoriesListWidgetState extends State<SubCategoriesListWidget> {
             ),
             // the category card
             // the grid view of the subcategories
-            BlocBuilder<SubCategoriesViewModel,SubCategoriesState>(
-             builder: (context, state) {
-               switch (state) {
-
-                 case LoadingState():{
-                   return SliverToBoxAdapter(
-                       child: LoadingStateWidget());
-                 }
-                 case ErrorState():{
-                   return SliverToBoxAdapter(child: ErrorStateWidget(exception : state.exception));
-                 }
-                 case SuccessState():{
-                   var subCategories = state.subCategories;
-                   return SliverGrid(
-                       delegate: SliverChildBuilderDelegate(
-                         childCount: subCategories.length,
-                             (context, index) => SubCategoryItem(
-                               subCategories[index],
-                                 goToCategoryProductsListScreen),
-                       ),
-                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                         crossAxisCount: 2,
-                         childAspectRatio: 1,
-                         mainAxisSpacing: AppSize.s8,
-                         crossAxisSpacing: AppSize.s8,
-                       ))
-                   ;
-                 }
-               }
-             },
+            BlocBuilder<SubCategoriesViewModel, SubCategoriesState>(
+              builder: (context, state) {
+                switch (state) {
+                  case LoadingState():
+                    {
+                      return SliverToBoxAdapter(child: LoadingStateWidget());
+                    }
+                  case ErrorState():
+                    {
+                      return SliverToBoxAdapter(
+                          child: ErrorStateWidget(exception: state.exception));
+                    }
+                  case SuccessState():
+                    {
+                      var subCategories = state.subCategories;
+                      return SliverGrid(
+                          delegate: SliverChildBuilderDelegate(
+                            childCount: subCategories.length,
+                            (context, index) => SubCategoryItem(
+                                subCategories[index],
+                                goToCategoryProductsListScreen),
+                          ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 1,
+                            mainAxisSpacing: AppSize.s8,
+                            crossAxisSpacing: AppSize.s8,
+                          ));
+                    }
+                }
+              },
             )
           ],
         ),

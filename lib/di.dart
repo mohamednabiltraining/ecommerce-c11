@@ -4,7 +4,6 @@ import 'di.config.dart';
 
 final getIt = GetIt.instance;
 
-
 @InjectableInit(
   initializerName: 'init', // default
   preferRelativeImports: true, // default

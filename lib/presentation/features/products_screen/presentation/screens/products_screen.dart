@@ -12,7 +12,7 @@ import '../../../../core/widget/home_screen_app_bar.dart';
 
 class ProductsScreen extends StatefulWidget {
   ProductsCatalogArgs? productsCatalogArgs;
-  ProductsScreen(this.productsCatalogArgs,{super.key});
+  ProductsScreen(this.productsCatalogArgs, {super.key});
 
   @override
   State<ProductsScreen> createState() => _ProductsScreenState();
@@ -28,9 +28,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
       brand: widget.productsCatalogArgs?.brand,
       category: widget.productsCatalogArgs?.category,
       subCategory: widget.productsCatalogArgs?.subCategory,
-
     );
   }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
