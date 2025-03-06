@@ -33,8 +33,11 @@ import 'domain/usecase/categories/GetSubCategoriesUseCase.dart' as _i489;
 import 'domain/usecase/GetBrandsUseCase.dart' as _i262;
 import 'domain/usecase/GetProductsUseCase.dart' as _i935;
 import 'domain/usecase/login_use_case.dart' as _i839;
+import 'domain/usecase/register_use_case.dart' as _i293;
 import 'presentation/features/auth/presentation/view_models/login_view_model.dart'
     as _i216;
+import 'presentation/features/auth/presentation/view_models/register_view_model.dart'
+    as _i951;
 import 'presentation/features/main_layout/categories/presentation/widgets/subCategories/SubCategoriesViewModel.dart'
     as _i682;
 import 'presentation/features/main_layout/CategoriesViewModel.dart' as _i389;
@@ -79,22 +82,26 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i935.GetProductsUseCase(gh<_i693.ProductsRepo>()));
     gh.factory<_i839.LoginUseCase>(
         () => _i839.LoginUseCase(authRepo: gh<_i425.AuthRepo>()));
+    gh.factory<_i293.RegisterUseCase>(
+        () => _i293.RegisterUseCase(authRepo: gh<_i425.AuthRepo>()));
     gh.factory<_i489.GetSubCategoriesUseCase>(
         () => _i489.GetSubCategoriesUseCase(gh<_i293.CategoriesRepository>()));
     gh.factory<_i492.BrandsViewModel>(
         () => _i492.BrandsViewModel(gh<_i262.GetBrandsUseCase>()));
     gh.factory<_i1057.GetMostCommonCategories>(
         () => _i1057.GetMostCommonCategories(gh<_i293.CategoriesRepository>()));
+    gh.factory<_i951.RegisterViewModel>(
+        () => _i951.RegisterViewModel(gh<_i293.RegisterUseCase>()));
     gh.factory<_i682.SubCategoriesViewModel>(() =>
         _i682.SubCategoriesViewModel(gh<_i489.GetSubCategoriesUseCase>()));
     gh.factory<_i216.LoginViewModel>(
         () => _i216.LoginViewModel(gh<_i839.LoginUseCase>()));
     gh.factory<_i897.ProductsViewModel>(
         () => _i897.ProductsViewModel(gh<_i935.GetProductsUseCase>()));
-    gh.factory<_i413.CategoriesViewModel>(
-        () => _i413.CategoriesViewModel(gh<_i1057.GetMostCommonCategories>()));
     gh.factory<_i389.CategoriesViewModel>(
         () => _i389.CategoriesViewModel(gh<_i1057.GetMostCommonCategories>()));
+    gh.factory<_i413.CategoriesViewModel>(
+        () => _i413.CategoriesViewModel(gh<_i1057.GetMostCommonCategories>()));
     return this;
   }
 }

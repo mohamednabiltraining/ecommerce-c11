@@ -37,8 +37,14 @@ class _HomeTabState extends State<HomeTab> {
   void initState() {
     super.initState();
     _startImageSwitching();
-    categoriesViewModel.loadCategories();
-    brandsViewModel.loadBrands();
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    await Future.wait([
+      categoriesViewModel.loadCategories(),
+      brandsViewModel.loadBrands(),
+    ]);
   }
 
   void _startImageSwitching() {

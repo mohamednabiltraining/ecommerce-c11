@@ -3,7 +3,6 @@ import 'package:ecommerce_app/presentation/core/resources/values_manager.dart';
 import 'package:ecommerce_app/presentation/features/main_layout/categories/presentation/widgets/categories_list.dart';
 import 'package:ecommerce_app/presentation/features/main_layout/categories/presentation/widgets/subCategories/sub_categories_list.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoriesTabContent extends StatefulWidget {
   List<Category> categories;
@@ -26,8 +25,8 @@ class _CategoriesTabContentState extends State<CategoriesTabContent> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CategoriesListWidget(widget.categories ?? [], onCategoryItemSelected),
-        SizedBox(
+        CategoriesListWidget(widget.categories, onCategoryItemSelected),
+        const SizedBox(
           width: AppSize.s16,
         ),
         SubCategoriesListWidget(selectedCategory)

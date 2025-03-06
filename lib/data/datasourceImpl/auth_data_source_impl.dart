@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/data/ApiManager.dart';
 import 'package:ecommerce_app/data/datasource/auth_data_source.dart';
 import 'package:ecommerce_app/data/model/requests/login_request.dart';
+import 'package:ecommerce_app/data/model/requests/register_request.dart';
 import 'package:ecommerce_app/domain/Result.dart';
 import 'package:ecommerce_app/domain/model/authintication.dart';
 import 'package:injectable/injectable.dart';
@@ -15,6 +16,27 @@ class AuthDataSourceImpl implements AuthDataSource {
   @override
   Future<Result<Authintication>> login(LoginRequest loginRequest) async {
     var result = await apiManager.login(loginRequest);
+
+    switch (result) {
+      case Success():
+        {
+          return Success(data: result.data.toDomain());
+        }
+      case ServerError():
+        {
+          return ServerError(result.exception);
+        }
+      case Error():
+        {
+          return Error(result.exception);
+        }
+    }
+  }
+
+  @override
+  Future<Result<Authintication>> register(
+      RegisterRequest registerRequest) async {
+    var result = await apiManager.register(registerRequest);
 
     switch (result) {
       case Success():

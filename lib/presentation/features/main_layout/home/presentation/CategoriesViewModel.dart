@@ -10,7 +10,7 @@ class CategoriesViewModel extends Cubit<CategoriesState> {
   CategoriesViewModel(this.getMostCommonCategoriesUseCase)
       : super(CategoriesLoadingState());
 
-  void loadCategories() async {
+  Future<void> loadCategories() async {
     emit(CategoriesLoadingState());
     // call api
     var result = await getMostCommonCategoriesUseCase.invoke();

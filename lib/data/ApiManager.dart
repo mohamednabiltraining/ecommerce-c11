@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/data/extentsions.dart';
 import 'package:ecommerce_app/data/model/requests/login_request.dart';
+import 'package:ecommerce_app/data/model/requests/register_request.dart';
 import 'package:ecommerce_app/data/model/responses/BrandDto.dart';
 import 'package:ecommerce_app/data/model/responses/CategoryDto.dart';
 import 'package:ecommerce_app/data/model/responses/ErrorResponse.dart';
@@ -35,6 +36,7 @@ class ApiManager {
   static String subCategoriesEndpoint = "${baseUrl}api/v1/categories/";
   static String productsEndpoint = "${baseUrl}api/v1/products";
   static String loginEndpoint = "${baseUrl}api/v1/auth/signin";
+  static String registerEndpoint = "${baseUrl}api/v1/auth/signup";
 
   Future<Result<List<CategoryDto>?>> loadCategories() async {
     try {
@@ -69,11 +71,31 @@ class ApiManager {
     }
   }
 
-  Future<Result<AuthResponse>> login( LoginRequest loginRequest) async {
+  Future<Result<AuthResponse>> login(LoginRequest loginRequest) async {
     try {
       var response = await dio.post(
         loginEndpoint,
         data: loginRequest.toJson(),
+      );
+      var authResponse = AuthResponse.fromJson(response.data);
+
+      if (response.statusCode?.isSuccessCall() == true) {
+        return Success(data: authResponse);
+      }
+      var errorResponse = ErrorResponse.fromJson(response.data);
+
+      return ServerError(
+          ServerErrorException(errorResponse.statusMsg, errorResponse.message));
+    } on Exception catch (ex) {
+      return Error(ex);
+    }
+  }
+
+  Future<Result<AuthResponse>> register(RegisterRequest registerRequest) async {
+    try {
+      var response = await dio.post(
+        registerEndpoint,
+        data: registerRequest.toJson(),
       );
       var authResponse = AuthResponse.fromJson(response.data);
 

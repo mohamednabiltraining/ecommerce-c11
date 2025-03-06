@@ -2,6 +2,8 @@ import 'package:ecommerce_app/data/model/requests/login_request.dart';
 import 'package:ecommerce_app/di.dart';
 import 'package:ecommerce_app/presentation/core/resources/assets_manager.dart';
 import 'package:ecommerce_app/presentation/core/resources/color_manager.dart';
+import 'package:ecommerce_app/presentation/core/resources/font_manager.dart';
+import 'package:ecommerce_app/presentation/core/resources/styles_manager.dart';
 import 'package:ecommerce_app/presentation/core/resources/values_manager.dart';
 import 'package:ecommerce_app/presentation/core/routes_manager/routes.dart';
 import 'package:ecommerce_app/presentation/core/widget/custom_elevated_button.dart';
@@ -13,9 +15,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../core/resources/font_manager.dart';
-import '../../../../core/resources/styles_manager.dart';
-
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
@@ -24,53 +23,42 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final _userNameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt.get<LoginViewModel>(),
+      create: (context) => getIt<LoginViewModel>(),
       child: BlocConsumer<LoginViewModel, LoginState>(
         listener: (context, state) {
-          if (state is LoginSuccessState) {
-            Navigator.pushNamedAndRemoveUntil(
-                context, Routes.mainRoute, (Route<dynamic> route) => false);
-          }
-          if (state is LoginErrorState) {
-            Navigator.pop(context);
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.exception.toString())));
-          }
+          switch (state) {
+            case LoginLoadingState():
+              showDialog(
+                  context: context,
+                  builder: (context) =>
+                      const Center(child: CircularProgressIndicator()));
+              break;
 
-          if (state is LoginLoadingState) {
-            showDialog(
-                context: context,
-                builder: (context) => const Center(
-                      child: CircularProgressIndicator(),
-                    ));
+            case LoginSuccessState():
+              Navigator.pushNamedAndRemoveUntil(
+                  context, Routes.mainRoute, (route) => false);
+              break;
+
+            case LoginErrorState():
+              {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(state.exception.toString()),
+                ));
+              }
           }
-          // switch (state) {
-          //   case LoginSuccessState():
-          //     {
-          //       Navigator.pushNamedAndRemoveUntil(
-          //           context, Routes.mainRoute, (Route<dynamic> route) => false);
-          //     }
-          //   case LoginLoadingState():
-          //     {
-          //       showDialog(
-          //           context: context,
-          //           builder: (context) => const Center(
-          //                 child: CircularProgressIndicator(),
-          //               ));
-          //     }
-          //   case LoginErrorState():
-          //     {
-          //       Navigator.pop(context);
-          //       ScaffoldMessenger.of(context).showSnackBar(
-          //           SnackBar(content: Text(state.exception.toString())));
-          //     }
-          // }
         },
         builder: (context, state) {
           return Scaffold(
@@ -106,7 +94,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         BuildTextField(
                           backgroundColor: ColorManager.white,
-                          controller: _emailController,
+                          controller: _userNameController,
                           hint: 'enter your name',
                           label: 'User name',
                           textInputType: TextInputType.emailAddress,
@@ -116,8 +104,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           height: AppSize.s28.h,
                         ),
                         BuildTextField(
-                          hint: 'enter your password',
                           controller: _passwordController,
+                          hint: 'enter your password',
                           backgroundColor: ColorManager.white,
                           label: 'Password',
                           validation: AppValidators.validatePassword,
@@ -147,22 +135,25 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: SizedBox(
                             // width: MediaQuery.of(context).size.width * .8,
                             child: CustomElevatedButton(
-                              // borderRadius: AppSize.s8,
-                              isStadiumBorder: false,
-                              label: 'Login',
-                              backgroundColor: ColorManager.white,
-                              textStyle: getBoldStyle(
-                                  color: ColorManager.primary,
-                                  fontSize: AppSize.s18),
-                              onTap: () {
-                                if (_formKey.currentState!.validate()) {
-                                  getIt.get<LoginViewModel>().login(
-                                      LoginRequest(
-                                          email: _emailController.text,
-                                          password: _passwordController.text));
-                                }
-                              },
-                            ),
+                                // borderRadius: AppSize.s8,
+                                isStadiumBorder: false,
+                                label: 'Login',
+                                backgroundColor: ColorManager.white,
+                                textStyle: getBoldStyle(
+                                    color: ColorManager.primary,
+                                    fontSize: AppSize.s18),
+                                onTap: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    context.read<LoginViewModel>().login(
+                                        LoginRequest(
+                                            email: _userNameController.text,
+                                            password:
+                                                _passwordController.text));
+
+                                    // Navigator.pushNamedAndRemoveUntil(
+                                    //     context, Routes.mainRoute, (route) => false);
+                                  }
+                                }),
                           ),
                         ),
                         SizedBox(
@@ -190,8 +181,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                             ),
                           ],
-                        ),
-                        // const LoginListener(),
+                        )
                       ],
                     ),
                   ),

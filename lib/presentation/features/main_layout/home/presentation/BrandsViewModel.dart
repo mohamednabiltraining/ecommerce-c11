@@ -9,7 +9,7 @@ class BrandsViewModel extends Cubit<BrandsState> {
   GetBrandsUseCase getBrandsUseCase;
   BrandsViewModel(this.getBrandsUseCase) : super(BrandsLoadingState());
 
-  void loadBrands() async {
+  Future<void>  loadBrands() async {
     emit(BrandsLoadingState());
     // call api
     var result = await getBrandsUseCase.invoke();

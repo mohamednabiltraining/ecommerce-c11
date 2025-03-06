@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/data/model/requests/login_request.dart';
 import 'package:ecommerce_app/domain/Result.dart';
 import 'package:ecommerce_app/domain/usecase/login_use_case.dart';
+import 'package:ecommerce_app/presentation/core/app_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -16,6 +17,7 @@ class LoginViewModel extends Cubit<LoginState> {
     switch (result) {
       case Success():
         {
+          AppStorage.setToken(result.data?.token);
           emit(LoginSuccessState());
         }
       case Error():
